@@ -8,7 +8,7 @@ import os
 from databases.db import db
 from databases.models import Files
 
-from tasksx import tasks
+# from tasksx import tasks
 
 
 class FileController(Resource):
@@ -43,7 +43,7 @@ class FileController(Resource):
                 save = Files(**fileData)
                 db.session.add(save)
                 db.session.commit()
-                tasks.process_document.delay(save.id, save.path)
+                # tasks.process_document.delay(save.id, save.path)
                 return jsonify(save)
             else:
                 return {"msg": "file not found"}

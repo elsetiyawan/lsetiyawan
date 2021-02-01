@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
-from tasksx import celery
 
 import os
 import datetime
@@ -28,24 +27,6 @@ api = Api(app)
 api.add_resource(UserController, "/api/v1/users")
 api.add_resource(AuthController, "/api/v1/login")
 api.add_resource(FileController, "/api/v1/files")
-
-# celery
-def make_celery(app):
-    celery = celery(app.import_name, broker='amqp://localhost')
-    celery.conf.update(app.config)
-    TaskBase = celery.Task
-
-    class ContextTask(TaskBase):
-        abstract = True
-
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return TaskBase.__call__(self, *args, **kwargs)
-    celery.Task = ContextTask
-    return celery
-
-
-celery = make_celery(app)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
