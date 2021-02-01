@@ -2,10 +2,13 @@ from flask import request, jsonify, current_app
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.utils import secure_filename
+
 import os
 
 from databases.db import db
 from databases.models import Files
+
+from tasksx import tasks
 
 
 class FileController(Resource):
@@ -40,6 +43,7 @@ class FileController(Resource):
                 save = Files(**fileData)
                 db.session.add(save)
                 db.session.commit()
+                tasks.process_document.delay(save.id, save.path)
                 return jsonify(save)
             else:
                 return {"msg": "file not found"}
