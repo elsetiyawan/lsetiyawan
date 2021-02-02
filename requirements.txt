@@ -1,9 +1,15 @@
 alembic==1.5.3
+amqp==5.0.5
 aniso8601==8.1.1
 autopep8==1.5.4
 bcrypt==3.2.0
+billiard==3.6.3.0
+celery==5.0.5
 cffi==1.14.4
 click==7.1.2
+click-didyoumean==0.0.3
+click-plugins==1.1.1
+click-repl==0.1.6
 Flask==1.1.2
 Flask-Bcrypt==0.7.1
 Flask-JWT-Extended==3.25.0
@@ -13,8 +19,10 @@ Flask-Script==2.0.6
 Flask-SQLAlchemy==2.4.4
 itsdangerous==1.1.0
 Jinja2==2.11.3
+kombu==5.0.2
 Mako==1.1.4
 MarkupSafe==1.1.1
+prompt-toolkit==3.0.14
 psycopg2==2.8.6
 pycodestyle==2.6.0
 pycparser==2.20
@@ -26,4 +34,6 @@ pytz==2021.1
 six==1.15.0
 SQLAlchemy==1.3.22
 toml==0.10.2
+vine==5.0.0
+wcwidth==0.2.5
 Werkzeug==1.0.1

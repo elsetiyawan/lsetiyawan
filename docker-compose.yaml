@@ -12,6 +12,13 @@ services:
       - POSTGRES_DB=elsetiyawan
     networks:
       - flask_network
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq
+    ports:
+      - 5672:5672
+    networks:
+      - flask_network
   app:
     container_name: flaskapp
     image: flaskapp
@@ -19,6 +26,7 @@ services:
       - 5000:5000
     depends_on:
       - db
+      - rabbitmq
     environment:
       - DATABASE_URI=postgresql://elsetiyawan:1123581321@db/elsetiyawan
       - JWT_SECRET=thesecretliesonthesky

@@ -44,7 +44,7 @@ def make_celery(app):
         }
     }
 
-    celery = Celery(app.import_name, broker='amqp://localhost')
+    celery = Celery(app.import_name, broker='amqp://rabbitmq')
     celery.conf.update(app.config)
     TaskBase = celery.Task
 
