@@ -30,9 +30,9 @@ class FileController(Resource):
                 filename = secure_filename(file.filename)
                 if not filename.endswith(".txt"):
                     return {"msg": "Only .txt allowed"}
-                size = 100
                 path = os.path.join(
                     current_app.config['UPLOAD_FOLDER'], filename)
+                size = os.stat(path).st_size
                 file.save(path)
                 fileData = {
                     "name": filename,
