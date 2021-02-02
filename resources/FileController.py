@@ -32,8 +32,8 @@ class FileController(Resource):
                     return {"msg": "Only .txt allowed"}
                 path = os.path.join(
                     current_app.config['UPLOAD_FOLDER'], filename)
-                size = os.stat(path).st_size
                 file.save(path)
+                size = os.stat(path).st_size
                 fileData = {
                     "name": filename,
                     "size": size,
